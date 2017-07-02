@@ -10,16 +10,14 @@ div.navbar.navbar-default.navbar-static-top
 
     div#navbar-main.navbar-collapse.collapse(uib-collapse='$ctrl.isCollapsed')
       ul.nav.navbar-nav
-        li(ng-repeat='item in $ctrl.menu', ui-sref-active='active')
+        li(ng-show='$ctrl.isAdmin()',ng-repeat='item in $ctrl.menu', ui-sref-active='active')
           a(ui-sref='{{item.state}}') {{item.title}}
 
         li(ng-show='$ctrl.isAdmin()', ui-sref-active='active')
           a(ui-sref='admin') Admin
 
       ul.nav.navbar-nav.navbar-right
-        li(ng-hide='$ctrl.isLoggedIn()', ui-sref-active='active')
-          a(ui-sref='signup') Sign up
-
+      
         li(ng-hide='$ctrl.isLoggedIn()', ui-sref-active='active')
           a(ui-sref='login') Login
 
