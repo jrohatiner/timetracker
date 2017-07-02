@@ -1,0 +1,8 @@
+.container
+    ul.list-group
+        li.list-group-item(ng-repeat='task in taskListCtrl.tasks')
+            strong {{task.name}}
+            br
+            span.text-muted {{task.from | date:'d MMM, yyyy (h:mm a'}} - {{task.from | date:' h:mm a)'}}
+            a.trash(ng-click='taskListCtrl.edit(user)')
+                span.glyphicon.glyphicon-edit.pull-right

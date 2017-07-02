@@ -1,0 +1,19 @@
+form.form(name='form', ng-submit='taskNewCtrl.addtask(vm.user)', novalidate='')
+    .form-group(ng-class='{ "has-success": form.name.$valid && vm.submitted,\
+        "has-error": form.name.$invalid && vm.submitted }')
+        label Name
+        input.form-control(type='text', ng-model='vm.user.name', required)
+        p.help-block(ng-show='form.name.$error.required && vm.submitted')
+            | A name is required
+
+    div(uib-timepicker ng-model="vm.user.from" show-meridian="true" required)
+
+    div(uib-timepicker ng-model="vm.user.to" show-meridian="true" required)
+
+    div
+        .text-danger(ng-if='vm.error' ng-bind='vm.error')
+        .text-success(ng-if='vm.success' ng-bind='vm.success')
+        button.btn.btn-inverse.btn-lg.btn-register(type='submit' ng-disabled="form.$invalid")
+            | Add Task
+
+    hr

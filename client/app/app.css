@@ -46,6 +46,8 @@
 /* inject:css */
 @import 'admin/admin.css';
 @import 'main/main.css';
+@import 'task/task-list/task-list.css';
+@import 'task/task-new/task-new.css';
 @import '../components/footer/footer.css';
 @import '../components/oauth-buttons/oauth-buttons.css';
 /* endinject */
