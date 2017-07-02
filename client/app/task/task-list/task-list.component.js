@@ -11,6 +11,7 @@ export class TaskListComponent {
   }
 
   $onInit() {
+      this.today = new Date();
       this.$http.get('/api/tasks').then((response) => {
           this.tasks = response.data;
       }).catch(() => {

@@ -1,10 +1,10 @@
 .container
   p
-    | The delete user and user index api routes are restricted to users with the 'admin' role.
+    | List all tasks by user
   ul.list-group
-    li.list-group-item(ng-repeat='user in admin.users')
-      strong {{user.name}}
+    li.list-group-item(ng-repeat='task in admin.tasks')
+      strong {{task.name}}
       br
-      span.text-muted {{user.email}}
-      a.trash(ng-click='admin.delete(user)')
-        span.glyphicon.glyphicon-trash.pull-right
+      span.text-muted {{task.from | date:'d MMM, yyyy (h:mm a'}} - {{task.from | date:' h:mm a)'}}
+      strong.text-muted.pull-right {{task.User.name}}
+

@@ -4,5 +4,8 @@
             strong {{task.name}}
             br
             span.text-muted {{task.from | date:'d MMM, yyyy (h:mm a'}} - {{task.from | date:' h:mm a)'}}
-            a.trash(ng-click='taskListCtrl.edit(user)')
+            a.trash(
+                ng-click='taskListCtrl.edit(user)'
+                ui-sref='task.edit({_id:task._id})'
+                ng-if='(task.from | date:"d MMM, yyyy") === (taskListCtrl.today | date:"d MMM, yyyy")')
                 span.glyphicon.glyphicon-edit.pull-right

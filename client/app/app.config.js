@@ -2,8 +2,8 @@
 
 export function routeConfig($urlRouterProvider, $locationProvider) {
   'ngInject';
-
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.when('', '/tasks');
+  $urlRouterProvider.otherwise('/tasks');
 
   $locationProvider.html5Mode(true);
 }

@@ -19,7 +19,8 @@ import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
-import main from './main/main.component';
+
+// import main from './main/main.component';
 import task from './task/task.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
@@ -27,7 +28,7 @@ import util from '../components/util/util.module';
 import './app.css';
 
 angular.module('timetrackfinalApp', [ngCookies, ngResource, ngSanitize, uiRouter, _Auth, account, task,
-  admin, 'validation.match', navbar, footer, main, constants, util
+  admin, 'validation.match', navbar, footer, constants, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

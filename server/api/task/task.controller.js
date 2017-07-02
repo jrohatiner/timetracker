@@ -11,7 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Task} from '../../sqldb';
+import {User, Task} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -75,18 +75,22 @@ export function index(req, res) {
 
 // Gets a list of Tasks
 export function all(req, res) {
-  return Task.findAll()
+  return Task.findAll({
+      include: [User]
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a single Task from the DB
 export function show(req, res) {
-  return Task.find({
-    where: {
-      _id: req.params.id
-    }
-  })
+  return Task
+    .find({
+      where: {
+        _id: req.params.id,
+        UserId: req.user._id,
+      }
+    })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -108,12 +112,17 @@ export function upsert(req, res) {
     Reflect.deleteProperty(req.body, '_id');
   }
 
-  return Task.upsert(req.body, {
-    where: {
-      _id: req.params.id
-    }
-  })
-    .then(respondWithResult(res))
+  return Task
+    .find({
+      where: {
+        _id: req.params.id,
+        UserId: req.user._id,
+      }
+    })
+    .then(task => {
+      if(!task) return res.status(404).end('Not Found');
+      return task.update(req.body).then(x => res.json(x));
+    })
     .catch(handleError(res));
 }
 

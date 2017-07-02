@@ -1,19 +1,22 @@
-form.form(name='form', ng-submit='taskNewCtrl.addtask(vm.user)', novalidate='')
-    .form-group(ng-class='{ "has-success": form.name.$valid && vm.submitted,\
-        "has-error": form.name.$invalid && vm.submitted }')
-        label Name
-        input.form-control(type='text', ng-model='vm.user.name', required)
-        p.help-block(ng-show='form.name.$error.required && vm.submitted')
-            | A name is required
+div.container: .col-lg-4.col-md-4
+    form.form(name='form', ng-submit='taskNewCtrl.addtask(taskNewCtrl.user)', novalidate='')
+        .col-xs-12: .form-group(ng-class='{ "has-success": form.name.$valid && taskNewCtrl.submitted,\
+            "has-error": form.name.$invalid && taskNewCtrl.submitted }')
+            label Name
+            input.form-control(type='text', ng-model='taskNewCtrl.user.name', required)
+            p.help-block(ng-show='form.name.$error.required && taskNewCtrl.submitted')
+                | A name is required
+        .col-lg-6
+            label From time
+                div(uib-timepicker ng-model="taskNewCtrl.user.from" show-meridian="true" required)
+        .col-lg-6
+            label To time
+                div(uib-timepicker ng-model="taskNewCtrl.user.to" show-meridian="true" required)
 
-    div(uib-timepicker ng-model="vm.user.from" show-meridian="true" required)
+        .col-xs-12
+            .text-danger(ng-if='taskNewCtrl.error' ng-bind='taskNewCtrl.error')
+            .text-success(ng-if='taskNewCtrl.success' ng-bind='taskNewCtrl.success')
+            button.btn.btn-inverse.btn-lg.btn-register(type='submit' ng-disabled="form.$invalid")
+                | Submit Task
 
-    div(uib-timepicker ng-model="vm.user.to" show-meridian="true" required)
-
-    div
-        .text-danger(ng-if='vm.error' ng-bind='vm.error')
-        .text-success(ng-if='vm.success' ng-bind='vm.success')
-        button.btn.btn-inverse.btn-lg.btn-register(type='submit' ng-disabled="form.$invalid")
-            | Add Task
-
-    hr
+        hr
