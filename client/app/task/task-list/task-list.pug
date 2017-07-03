@@ -3,7 +3,7 @@
         li.list-group-item(ng-repeat='task in taskListCtrl.tasks')
             strong {{task.name}}
             br
-            span.text-muted {{task.from | date:'d MMM, yyyy (h:mm a'}} - {{task.from | date:' h:mm a)'}}
+            span.text-muted {{task.from | date:'d MMM, yyyy (h:mm a'}} - {{task.to | date:' h:mm a)'}}
             a.trash(
                 ng-click='taskListCtrl.edit(user)'
                 ui-sref='task.edit({_id:task._id})'
